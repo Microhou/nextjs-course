@@ -18,7 +18,7 @@ const Content = () => {
     isLoading,
     error,
   } = useQueryPost();
-
+  
   if (isLoading) {
     return <p>Loading...</p>;
   }
