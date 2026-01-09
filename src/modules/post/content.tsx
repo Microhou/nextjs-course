@@ -2,6 +2,7 @@
 
 import Post from "@/components/post";
 import { useRouter } from "next/navigation";
+import useQueryPost from "@/hooks/useQuertPost";
 
 const mockPost: Post = {
   id: "1",
@@ -12,13 +13,29 @@ const mockPost: Post = {
 
 const Content = () => {
   const router = useRouter();
+  const {
+    data: { post },
+    isLoading,
+    error,
+  } = useQueryPost();
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error loading post.</p>;
+  }
 
   return (
     <div>
-      <button onClick={() => router.back()} className="text-sm text-white font-bold">
+      <button
+        onClick={() => router.back()}
+        className="text-sm text-white font-bold"
+      >
         {"← Back"}
       </button>
-      <Post post={mockPost} />
+      <Post post={post} />
     </div>
   );
 };
