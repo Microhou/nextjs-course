@@ -14,11 +14,11 @@ const mockPost: Post = {
 const Content = () => {
   const router = useRouter();
   const {
-    data: { post },
+    data = {},
     isLoading,
     error,
   } = useQueryPost();
-  
+   const { post } = data;
   if (isLoading) {
     return <p>Loading...</p>;
   }
